@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.16.0",
+    "pdf-lib": "^1.17.1"
+  }
+}
