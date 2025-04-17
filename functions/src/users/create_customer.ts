@@ -10,12 +10,13 @@ interface CreateCustomerData {
   surname: string;
   phone: string;
   id: string;
+  email?: string;
 //   initialLoan: string;
 //   interestRate: string;
 //   totalToPay: string;
-  cardNumber: string;
-  cvv: string;
-  expiryDate: string;
+//   cardNumber: string;
+//   cvv: string;
+//   expiryDate: string;
 //   amountToPay: string;
 //   scheduledDate: string;
   
@@ -29,9 +30,9 @@ export const createCustomer = onCall(async (request) => {
   const uid = request.auth.uid;
 
   // Validate required fields
-  const { name, surname, phone, id, cardNumber, cvv, expiryDate } = request.data as CreateCustomerData;
+  const { name, surname, phone, id, email} = request.data as CreateCustomerData;
 
-  if (!name || !surname || !phone || !id ) {
+  if (!name || !surname || !phone || !id || !email) {
     throw new HttpsError('invalid-argument', 'Missing required fields.');
   }
   const ucn = await getRandomUniqueCustomerNumber("Customers");
@@ -46,15 +47,16 @@ export const createCustomer = onCall(async (request) => {
       surname,
       phone,
       id,
+      email,
     //   initial_loan: initialLoan,
       loan_shark_uid: uid,
       createdAt: now.iso_string_date,
       unique_customer_number: ucn,
     //   interest_rate: interestRate,
     //   total_to_pay: totalToPay,
-      card_number: cardNumber,
-      cvv: cvv,
-      expiry_date: expiryDate,
+    //   card_number: cardNumber,
+    //   cvv: cvv,
+    //   expiry_date: expiryDate,
     //   amount_to_pay: amountToPay,
     //   scheduled_date: scheduledDate,
     };
